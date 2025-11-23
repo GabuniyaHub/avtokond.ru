@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ООО "Автоконд" - Техосмотр и транспортное обслуживание</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Подключение шрифтов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Melbourne_skybus_logo.svg/1024px-Melbourne_skybus_logo.svg.png?20230301150958" type="image/x-icon">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e293b',
+                        secondary: '#334155',
+                        accent: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Применение шрифтов */
+        body {
+            font-family: 'Inter', 'Roboto', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+        
+        .font-inter {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .font-roboto {
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/indexBanner.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .map-container {
+            filter: grayscale(1) contrast(1.2) opacity(0.9);
+        }
+        header {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Шапка (Header / Навигация) -->
+    <header class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Автоконд</h1>
+            </div>
+            
+            <!-- Навигация для десктопа (скрывается на md и меньше) -->
+            <nav class="hidden lg:flex space-x-6">
+                <a href="#services" class="text-gray-700 hover:text-gray-900 transition">Услуги</a>
+                <a href="#about" class="text-gray-700 hover:text-gray-900 transition">О нас</a>
+                <a href="#jobs" class="text-gray-700 hover:text-gray-900 transition">Вакансии</a>
+                <a href="#info" class="text-gray-700 hover:text-gray-900 transition">Информация для клиентов</a>
+                <a href="#contacts" class="text-gray-700 hover:text-gray-900 transition">Контакты</a>
+                <a href="#map" class="text-gray-700 hover:text-gray-900 transition">Мы на карте</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <a href="#appointment" class="hidden lg:block bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900 transition">Записаться</a>
+                
+                <!-- Бургер-меню для мобильных и планшетов (показывается на md и меньше) -->
+                <button id="mobile-menu-button" class="lg:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Мобильное меню -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white py-4 px-4 shadow-lg">
+            <nav class="flex flex-col space-y-3">
+                <a href="#services" class="text-gray-700 hover:text-gray-900 transition py-2">Услуги</a>
+                <a href="#about" class="text-gray-700 hover:text-gray-900 transition py-2">О нас</a>
+                <a href="#jobs" class="text-gray-700 hover:text-gray-900 transition py-2">Вакансии</a>
+                <a href="#info" class="text-gray-700 hover:text-gray-900 transition py-2">Информация для клиентов</a>
+                <a href="#contacts" class="text-gray-700 hover:text-gray-900 transition py-2">Контакты</a>
+                <a href="#map" class="text-gray-700 hover:text-gray-900 transition py-2">Мы на карте</a>
+                <a href="#appointment" class="bg-gray-800 text-white px-4 py-2 rounded text-center hover:bg-gray-900 transition">Записаться</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Баннер (Hero Section) -->
+    <section class="hero-bg min-h-screen flex items-center pt-16">
+        <div class="container mx-auto px-4 text-center text-white">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Официальные услуги техосмотра и транспортного обслуживания</h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">Работаем в соответствии с нормативами. Надёжность, ответственность и профессионализм</p>
+            <a href="#appointment" class="bg-accent text-white text-xl px-8 py-4 rounded-lg hover:bg-primary transition inline-block">Записаться на техосмотр</a>
+        </div>
+    </section>
+
+    <!-- Преимущества компании -->
+    <section id="benefits" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-primary">Наши преимущества</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center">
+                    <div class="text-accent text-5xl mb-4">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">10+ лет на рынке</h3>
+                    <p class="text-gray-600">С 2015 года успешной работы и сотни довольных клиентов</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center">
+                    <div class="text-accent text-5xl mb-4">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Комплекс услуг в одном месте</h3>
+                    <p class="text-gray-600">Все необходимые транспортные услуги от техосмотра до перевозок</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md text-center">
+                    <div class="text-accent text-5xl mb-4">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Квалифицированные специалисты</h3>
+                    <p class="text-gray-600">Опытные сотрудники с соответствующими сертификатами и допусками</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Услуги -->
+    <section id="services" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-primary">Наши услуги</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Карточка услуги 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition cursor-pointer" onclick="openModal('inspection-modal')">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Гостехосмотр</h3>
+                    <p class="text-gray-600 mb-4">Официальное проведение технического осмотра транспортных средств в соответствии с требованиями законодательства</p>
+                    <div class="text-accent font-medium flex items-center">
+                        Подробнее <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Карточка услуги 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition cursor-pointer" onclick="openModal('transport-modal')">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-bus"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Регулярные перевозки</h3>
+                    <p class="text-gray-600 mb-4">Междугородние автобусные маршруты с четким графиком по Кондинскому району и за его пределами</p>
+                    <div class="text-accent font-medium flex items-center">
+                        Подробнее <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Карточка услуги 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition cursor-pointer" onclick="openModal('pretrip-modal')">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Предрейсовый техосмотр</h3>
+                    <p class="text-gray-600 mb-4">Контроль технического состояния транспорта перед выходом на линию для обеспечения безопасности</p>
+                    <div class="text-accent font-medium flex items-center">
+                        Подробнее <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Карточка услуги 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition cursor-pointer" onclick="openModal('medical-modal')">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Медосмотр водителей</h3>
+                    <p class="text-gray-600 mb-4">Проведение предрейсовых и послерейсовых медицинских осмотров водительского состава</p>
+                    <div class="text-accent font-medium flex items-center">
+                        Подробнее <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Карточка услуги 5 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition cursor-pointer" onclick="openModal('rent-modal')">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Аренда помещений</h3>
+                    <p class="text-gray-600 mb-4">Предоставление в аренду офисных, складских и производственных помещений</p>
+                    <div class="text-accent font-medium flex items-center">
+                        Подробнее <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Карточка услуги 6 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition cursor-pointer" onclick="openModal('bus-modal')">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-bus-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Заказные автобусы</h3>
+                    <p class="text-gray-600 mb-4">Аренда автобусов для поездок по Кондинскому району и за его пределами</p>
+                    <div class="text-accent font-medium flex items-center">
+                        Подробнее <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Краткая информация о компании -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-primary">ООО «Автоконд»</h2>
+            
+            <div class="bg-gray-50 p-8 rounded-lg shadow-md mb-10">
+                <h3 class="text-2xl font-bold mb-4 text-accent">Наша история</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-accent mb-2">2015</div>
+                        <p class="text-gray-600">год основания компании</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-accent mb-2">10+</div>
+                        <p class="text-gray-600">лет успешной работы</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-accent mb-2">1000+</div>
+                        <p class="text-gray-600">довольных клиентов</p>
+                    </div>
+                </div>
+                <p class="text-gray-700 mb-6">Компания ООО «Автоконд» начала свою деятельность в 2015 году и за годы работы зарекомендовала себя как надежный партнер в сфере транспортных услуг.</p>
+                <p class="text-gray-700 mb-6">Основным направлением нашей деятельности являются транспортные перевозки и предоставление полного спектра услуг, связанных с техническим обслуживанием транспортных средств.</p>
+                <div class="text-center">
+                    <a href="./about.html" class="bg-accent text-white px-6 py-3 rounded hover:bg-primary transition inline-block">
+                        Узнать больше о компании
+                    </a>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold mb-4 text-accent">Почему выбирают ООО «Автоконд»</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="text-accent text-4xl mb-3">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2">Качество и безопасность</h4>
+                        <p class="text-gray-600">Строгое соблюдение всех нормативов и требований безопасности</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-accent text-4xl mb-3">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2">Профессионализм</h4>
+                        <p class="text-gray-600">Высококвалифицированные специалисты с многолетним опытом работы</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-accent text-4xl mb-3">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2">Социальная ответственность</h4>
+                        <p class="text-gray-600">Активное участие в жизни региона и поддержка социальных инициатив</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Вакансии -->
+    <section id="jobs" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-primary">Работа в нашей компании</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-4 text-accent">Текущие вакансии</h3>
+                    <ul class="space-y-4">
+                        <li class="border-b pb-3">
+                            <h4 class="font-bold">Специалист по техосмотру</h4>
+                            <p class="text-gray-600 text-sm">Требования: опыт работы от 1 года, знание нормативной документации</p>
+                            <button onclick="openJobModal('specialist')" class="mt-2 text-accent hover:text-primary transition text-sm font-medium">
+                                Подробнее <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </li>
+                        <li class="border-b pb-3">
+                            <h4 class="font-bold">Водитель автобуса</h4>
+                            <p class="text-gray-600 text-sm">Требования: категория D, стаж вождения от 3 лет</p>
+                            <button onclick="openJobModal('driver')" class="mt-2 text-accent hover:text-primary transition text-sm font-medium">
+                                Подробнее <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </li>
+                        <li class="border-b pb-3">
+                            <h4 class="font-bold">Диспетчер</h4>
+                            <p class="text-gray-600 text-sm">Требования: опыт работы в логистике, грамотная речь</p>
+                            <button onclick="openJobModal('dispatcher')" class="mt-2 text-accent hover:text-primary transition text-sm font-medium">
+                                Подробнее <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-4 text-accent">Почему работать у нас</h3>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Стабильная заработная плата</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Официальное трудоустройство</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Профессиональное развитие</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Дружный коллектив</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Социальный пакет</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">Как откликнуться на вакансию?</h4>
+                        <p class="text-sm text-gray-600 mb-3">Отправьте резюме на email или позвоните по телефону:</p>
+                        <div class="space-y-1 text-sm">
+                            <a href="mailto:avtokond2000@yandex.ru" class="block text-accent hover:text-primary transition">
+                                <i class="fas fa-envelope mr-2"></i>avtokond2000@yandex.ru
+                            </a>
+                            <a href="tel:+73467733463" class="block text-accent hover:text-primary transition">
+                                <i class="fas fa-phone mr-2"></i>8 (34677) 33463
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Информация для клиентов -->
+    <section id="info" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-primary">Информация для клиентов</h2>
+            
+            <div class="bg-gray-50 p-8 rounded-lg shadow-md mb-10">
+                <h3 class="text-2xl font-bold mb-4 text-accent">Полезная информация</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="text-center">
+                        <div class="text-accent text-4xl mb-3">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2">Документы для техосмотра</h4>
+                        <p class="text-gray-600 text-sm">Полный перечень необходимых документов для прохождения ТО</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-accent text-4xl mb-3">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2">Частые вопросы</h4>
+                        <p class="text-gray-600 text-sm">Ответы на самые популярные вопросы о техосмотре и услугах</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4 text-gray-700">
+                    <p>Мы собрали всю необходимую информацию для наших клиентов в одном месте. Здесь вы найдете ответы на частые вопросы, перечень документов для техосмотра, информацию о порядке предоставления услуг и многое другое.</p>
+                    
+                    <div class="bg-white p-4 rounded-lg border-l-4 border-accent">
+                        <h4 class="font-bold mb-2">Важная информация:</h4>
+                        <ul class="list-disc pl-5 space-y-1 text-sm">
+                            <li>Техосмотр проводится строго по предварительной записи</li>
+                            <li>Для ТС категорий М2 и М3 выделены специальные дни</li>
+                            <li>Все услуги предоставляются в соответствии с законодательством РФ</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-6">
+                    <a href="./cleint.info.html" class="bg-accent text-white px-6 py-3 rounded hover:bg-primary transition inline-block">
+                        <i class="fas fa-book-open mr-2"></i>Полная информация для клиентов
+                    </a>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-50 p-6 rounded-lg text-center">
+                    <div class="text-accent text-4xl mb-3">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">График работы</h4>
+                    <p class="text-gray-600 text-sm">Вторник-Суббота: 8:30-17:30</p>
+                    <p class="text-gray-500 text-xs">Обед: 12:00-13:30</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg text-center">
+                    <div class="text-accent text-4xl mb-3">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">Наш адрес</h4>
+                    <p class="text-gray-600 text-sm">ул. Сибирская, 121</p>
+                    <p class="text-gray-500 text-xs">пгт. Междуреченский</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg text-center">
+                    <div class="text-accent text-4xl mb-3">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">Контакты</h4>
+                    <p class="text-gray-600 text-sm">8 (34677) 33463</p>
+                    <p class="text-gray-500 text-xs">avtokond2000@yandex.ru</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма записи -->
+    <section id="appointment" class="py-16 bg-accent text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Запись на услуги</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- Выбор типа услуги -->
+                <div class="bg-white text-gray-800 p-6 rounded-lg shadow-md mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-center">Выберите тип услуги</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <button id="btn-car" class="service-type-btn bg-gray-100 p-4 rounded-lg border-2 border-gray-300 hover:border-accent transition text-center">
+                            <i class="fas fa-car text-3xl mb-2 text-accent"></i>
+                            <p class="font-bold">Техосмотр автомобиля</p>
+                        </button>
+                        <button id="btn-bus" class="service-type-btn bg-gray-100 p-4 rounded-lg border-2 border-gray-300 hover:border-accent transition text-center">
+                            <i class="fas fa-bus text-3xl mb-2 text-accent"></i>
+                            <p class="font-bold">Техосмотр автобуса</p>
+                        </button>
+                        <button id="btn-truck" class="service-type-btn bg-gray-100 p-4 rounded-lg border-2 border-gray-300 hover:border-accent transition text-center">
+                            <i class="fas fa-truck text-3xl mb-2 text-accent"></i>
+                            <p class="font-bold">Техосмотр грузовика</p>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Форма для автобусов (М2 и М3) -->
+                 <div id="bus-appointment-form" class="hidden bg-white text-gray-800 p-8 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Запись на техосмотр ТС категории М2 и М3</h3>
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="bus-date">Дата</label>
+                                <input type="date" id="bus-date" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-accent">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="bus-time">Время</label>
+                                <select id="bus-time" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-accent">
+                                    <option value="">--:--</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="16:00">16:00</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="bus-model">Марка и модель</label>
+                            <input type="text" id="bus-model" placeholder="Введите марку и модель ТС" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-accent">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="bus-category">Категория ТС</label>
+                            <select id="bus-category" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-accent">
+                                <option value="">Выберите категорию</option>
+                                <option value="M2">М2 - автобусы до 5 тонн</option>
+                                <option value="M3">М3 - автобусы свыше 5 тонн</option>
+                            </select>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="bus-vin">VIN номер</label>
+                                <input type="text" id="bus-vin" placeholder="Введите VIN номер" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-accent">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="bus-number">Госномер</label>
+                                <input type="text" id="bus-number" placeholder="Введите госномер" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-accent">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="bus-phone">Телефон</label>
+                                <input type="tel" id="bus-phone" placeholder="Введите номер телефона" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-accent">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="bus-email">Email</label>
+                                <input type="email" id="bus-email" placeholder="Введите email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-accent">
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-accent text-white py-3 rounded-lg hover:bg-primary transition font-bold">Отправить заявку</button>
+                    </form>
+                </div>
+                
+                <!-- Общая форма (для других типов ТС) -->
+                <div id="general-appointment-form" class="hidden bg-white text-gray-800 p-8 rounded-lg shadow-md">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="name">ФИО</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-accent">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="phone">Телефон</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-accent">
+                            </div>
+                        </div>
+                        
+                        <div id="vehicle-type-field">
+                            <!-- Поле будет заполнено автоматически в зависимости от выбранного типа ТС -->
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="vehicle">Марка и модель ТС</label>
+                            <input type="text" id="vehicle" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-accent">
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="date">Предпочтительная дата</label>
+                                <input type="date" id="date" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-accent">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="time">Предпочтительное время</label>
+                                <select id="time" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-accent">
+                                    <option value="">Выберите время</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="17:00">17:00</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="message">Дополнительная информация</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-accent"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-accent text-white py-3 rounded-lg hover:bg-primary transition font-bold">Отправить заявку</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contacts" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-primary">Контакты</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Адрес</h3>
+                    <p class="text-gray-600">ул.Сибирская, 121, пгт. Междуреченский</p>
+                    <p class="text-gray-500 text-sm mt-2">Ханты-Мансийский автономный округ, Кондинский район</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Телефоны</h3>
+                    <div class="space-y-2">
+                        <a href="tel:+73467733463" class="block text-gray-600 hover:text-accent transition">8 (34677) 33463</a>
+                        <a href="tel:+73467741409" class="block text-gray-600 hover:text-accent transition">8 (34677) 41409</a>
+                        <a href="tel:+73467733946" class="block text-gray-600 hover:text-accent transition">8 (34677) 33946</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-accent text-4xl mb-4">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Email</h3>
+                    <a href="mailto:avtokond2000@yandex.ru" class="text-gray-600 hover:text-accent transition">avtokond2000@yandex.ru</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Новости (компактная версия) -->
+    <section id="news" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-center mb-8 text-primary">Новости компании</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Следите за нашими актуальными новостями, акциями и объявлениями</p>
+            
+            <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+                <div class="text-accent text-5xl mb-4">
+                    <i class="fab fa-vk"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Все новости в нашей группе ВК</h3>
+                <p class="text-gray-600 mb-6">Мы регулярно публикуем актуальную информацию о работе компании, специальных предложениях и изменениях в графике</p>
+                
+                <div class="space-y-3">
+                    <a href="https://vk.com/avtokond86" target="_blank" 
+                       class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition inline-flex items-center justify-center">
+                        <i class="fab fa-vk mr-2 text-lg"></i> Читать новости ВКонтакте
+                    </a>
+                    
+                    <a href="https://vk.com/avtokond86" target="_blank" 
+                       class="w-full border border-accent text-accent px-6 py-3 rounded-lg hover:bg-accent hover:text-white transition inline-flex items-center justify-center">
+                        <i class="fas fa-external-link-alt mr-2"></i> Открыть группу
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Карта -->
+    <section id="map" class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8 text-primary">Мы на карте</h2>
+            <div class="rounded-lg overflow-hidden shadow-lg map-container">
+                <iframe src="https://yandex.ru/map-widget/v1/?lang=ru_RU&scroll=true&source=constructor-api&um=constructor%3A1dd1cda23028c150a03c5ad284086a1a3e8ac4ea07ae3c9ac85f2978b2eb0b5b" width="100%" height="450" frameborder="0"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-primary text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold">ООО «Автоконд»</h3>
+                    <p class="text-gray-300">Техосмотр и транспортное обслуживание</p>
+                    <div class="mt-2 text-sm text-gray-400">
+                        <p>ОГРН: 1234567890123</p>
+                        <p>ИНН: 1234567890</p>
+                        <p>КПП: 123456789</p>
+                    </div>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://vk.com/avtokond86" class="text-gray-300 hover:text-white transition">
+                        <i class="fab fa-vk text-xl"></i>
+                    </a>
+                    <a href="https://vk.com/avtokond86" class="text-gray-300 hover:text-white transition">
+                        <i class="fab fa-telegram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+                <p>© 2026 ООО «Автоконд». Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальные окна для услуг -->
+    
+    <!-- Модальное окно для Гостехосмотра -->
+    <div id="inspection-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-primary">Гостехосмотр</h3>
+                    <button onclick="closeModal('inspection-modal')" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2">Адрес пункта технического осмотра:</h4>
+                        <p>Россия, Ханты-Мансийский автономный округ, Кондинский район, посёлок городского типа Междуреченский, Сибирская улица, 121Б</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">График работы пункта:</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Вторник - Суббота: 8:30-17:30</li>
+                            <li>Обеденный перерыв: 12:00-13:30</li>
+                            <li>Воскресенье, понедельник - выходные дни</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2">Для владельцев ТС категорий М2 и М3:</h4>
+                        <p>Проведение ТО ТС категорий М2 и М3 выполняется по четвергам с 8:00 до 17:00.</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Категории транспортных средств:</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                            <div><span class="font-medium">М1:</span> Легковые автомобили (до 8 пассажиров)</div>
+                            <div><span class="font-medium">М2:</span> Автобусы до 5 тонн</div>
+                            <div><span class="font-medium">М3:</span> Автобусы свыше 5 тонн</div>
+                            <div><span class="font-medium">N1:</span> Грузовики до 3,5 тонн</div>
+                            <div><span class="font-medium">N2:</span> Грузовики 3,5-12 тонн</div>
+                            <div><span class="font-medium">N3:</span> Грузовики свыше 12 тонн</div>
+                            <div><span class="font-medium">L:</span> Мототранспорт</div>
+                            <div><span class="font-medium">O3:</span> Прицепы 3,5-10 тонн</div>
+                            <div><span class="font-medium">O4:</span> Прицепы свыше 10 тонн</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button onclick="closeModal('inspection-modal')" class="bg-accent text-white px-4 py-2 rounded hover:bg-primary transition">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для Регулярных перевозок -->
+     <div id="transport-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-primary">Регулярные перевозки</h3>
+                    <button onclick="closeModal('transport-modal')" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-4">
+                    <p>Мы предоставляем регулярные междугородние автобусные маршруты с четким графиком по Кондинскому району и за его пределами.</p>
+                    
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2">Основные преимущества:</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Четкое соблюдение расписания</li>
+                            <li>Комфортабельные автобусы</li>
+                            <li>Опытные водители</li>
+                            <li>Доступные цены</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Как узнать расписание:</h4>
+                        <p>Актуальное расписание доступно по телефону или при личном обращении в наш офис.</p>
+                        <br><p>Для жителей "Кондинского района" актуальное расписание можно узнать на <a href="https://admkonda.ru/po-mezhdugorodnym-marshrutam.html" style="color: blue; text-decoration: none;">официальном сайте администрации</a></p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button onclick="closeModal('transport-modal')" class="bg-accent text-white px-4 py-2 rounded hover:bg-primary transition">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для Заказных автобусов -->
+    <div id="bus-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-primary">Заказные автобусы</h3>
+                    <button onclick="closeModal('bus-modal')" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-4">
+                    <p>Предоставляем услуги аренды автобусов для поездок по территории Кондинского района и за его пределами. Обеспечиваем комфортные и безопасные условия перевозки пассажиров.</p>
+                    
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2">Основные преимущества:</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Автобусы различной вместимости</li>
+                            <li>Возможность поездок за пределы района</li>
+                            <li>Гибкие тарифы для дальних поездок</li>
+                            <li>Опытные и вежливые водители</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Порядок предоставления:</h4>
+                        <ol class="list-decimal pl-5 space-y-2">
+                            <li>Оформление заявки на заказ автобуса</li>
+                            <li>Согласование маршрута и условий поездки</li>
+                            <li>Подписание договора и предоставление автобуса</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button onclick="closeModal('bus-modal')" class="bg-accent text-white px-4 py-2 rounded hover:bg-primary transition">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для Предрейсового техосмотра -->
+    <div id="pretrip-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-primary">Предрейсовый техосмотр</h3>
+                    <button onclick="closeModal('pretrip-modal')" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-4">
+                    <p>Оказываем услуги по обязательному предрейсовому и послерейсовому техническому осмотру транспортных средств, предусмотренному законодательством. Проверку проводят квалифицированные механики с оформлением подписи для допуска на маршрут.</p>
+                    
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2">Основные преимущества:</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Быстрое оформление документов</li>
+                            <li>Осмотр опытными специалистами</li>
+                            <li>Соответствие всем требованиям безопасности</li>
+                            <li>Удобное расположение для предприятий Кондинского района</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Порядок предоставления:</h4>
+                        <ol class="list-decimal pl-5 space-y-2">
+                            <li>Запись на проведение осмотра</li>
+                            <li>Прибытие транспортного средства для проверки</li>
+                            <li>Оформление подписи механика</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button onclick="closeModal('pretrip-modal')" class="bg-accent text-white px-4 py-2 rounded hover:bg-primary transition">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для Медосмотра водителей -->
+    <div id="medical-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-primary">Медосмотр водителей</h3>
+                    <button onclick="closeModal('medical-modal')" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-4">
+                    <p>Оказываем услуги по обязательному предрейсовому медицинскому осмотру водителей. Медосмотр проводится квалифицированными медработниками с оформлением печати или подписи, необходимых для допуска к рейсу.</p>
+                    
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2">Основные преимущества:</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Быстрое прохождение осмотра</li>
+                            <li>Квалифицированные медицинские работники</li>
+                            <li>Полное соответствие требованиям законодательства</li>
+                            <li>Возможность осмотра водителей из разных предприятий</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Порядок предоставления:</h4>
+                        <ol class="list-decimal pl-5 space-y-2">
+                            <li>Прибытие водителя для прохождения осмотра</li>
+                            <li>Проведение медицинского освидетельствования</li>
+                            <li>Оформление печати или подписи медика</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button onclick="closeModal('medical-modal')" class="bg-accent text-white px-4 py-2 rounded hover:bg-primary transition">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для Аренды помещений -->
+    <div id="rent-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-primary">Аренда помещений</h3>
+                    <button onclick="closeModal('rent-modal')" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-4">
+                    <p>Сдаем в аренду офисные, складские и производственные помещения, подходящие для различных нужд. В наличии — отапливаемые технические боксы, офисные кабинеты и складские площади.</p>
+                    
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2">Основные преимущества:</h4>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Отапливаемые технические боксы</li>
+                            <li>Удобные офисные помещения</li>
+                            <li>Просторные складские площади</li>
+                            <li>Долгосрочная и краткосрочная аренда</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Порядок предоставления:</h4>
+                        <ol class="list-decimal pl-5 space-y-2">
+                            <li>Обращение с запросом на аренду</li>
+                            <li>Осмотр помещений и согласование условий</li>
+                            <li>Подписание договора аренды</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-end">
+                    <button onclick="closeModal('rent-modal')" class="bg-accent text-white px-4 py-2 rounded hover:bg-primary transition">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для вакансий -->
+    <div id="jobs-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold text-primary" id="job-title">Вакансия</h3>
+                    <button onclick="closeModal('jobs-modal')" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-4" id="job-content">
+                    <!-- Содержание будет заполняться динамически -->
+                </div>
+                
+                <div class="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div class="text-sm text-gray-600">
+                        <p>Отправьте резюме на: <a href="mailto:avtokond2000@yandex.ru" class="text-accent hover:text-primary">avtokond2000@yandex.ru</a></p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="closeModal('jobs-modal')" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 transition">Закрыть</button>
+                        <a href="mailto:avtokond2000@yandex.ru" class="bg-accent text-white px-4 py-2 rounded hover:bg-primary transition">Откликнуться</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Мобильное меню
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Плавная прокрутка для якорных ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Закрываем мобильное меню при клике на ссылку
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Логика выбора типа услуги для формы
+        const serviceTypeButtons = document.querySelectorAll('.service-type-btn');
+        const busAppointmentForm = document.getElementById('bus-appointment-form');
+        const generalAppointmentForm = document.getElementById('general-appointment-form');
+        const vehicleTypeField = document.getElementById('vehicle-type-field');
+        
+        serviceTypeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Убираем выделение со всех кнопок
+                serviceTypeButtons.forEach(btn => {
+                    btn.classList.remove('border-accent', 'bg-accent', 'text-white');
+                    btn.classList.add('border-gray-300', 'bg-gray-100', 'text-gray-800');
+                });
+                
+                // Добавляем выделение к выбранной кнопке
+                this.classList.remove('border-gray-300', 'bg-gray-100', 'text-gray-800');
+                this.classList.add('border-accent', 'bg-accent', 'text-white');
+                
+                // Определяем тип ТС
+                let vehicleType = '';
+                let serviceType = '';
+                
+                if (this.id === 'btn-car') {
+                    vehicleType = 'Легковой автомобиль';
+                    serviceType = 'car';
+                }
+                if (this.id === 'btn-bus') {
+                    vehicleType = 'Автобус';
+                    serviceType = 'bus';
+                }
+                if (this.id === 'btn-truck') {
+                    vehicleType = 'Грузовой автомобиль';
+                    serviceType = 'truck';
+                }
+                
+                // Показываем соответствующую форму
+                if (serviceType === 'bus') {
+                    busAppointmentForm.classList.remove('hidden');
+                    generalAppointmentForm.classList.add('hidden');
+                } else {
+                    busAppointmentForm.classList.add('hidden');
+                    generalAppointmentForm.classList.remove('hidden');
+                    
+                    // Заполняем поле типа ТС
+                    vehicleTypeField.innerHTML = `
+                        <label class="block text-gray-700 mb-2" for="vehicle-type">Тип транспортного средства</label>
+                        <input type="text" id="vehicle-type" value="${vehicleType}" class="w-full px-4 py-2 border border-gray-300 rounded bg-gray-100" readonly>
+                    `;
+                }
+                
+                // Прокручиваем к форме
+                document.getElementById('appointment').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Функции для модальных окон
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        
+
+        // Закрытие модального окна при клике вне его
+        document.querySelectorAll('.fixed').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // Данные вакансий
+        const jobsData = {
+            'specialist': {
+                title: 'Специалист по техосмотру',
+                content: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">Обязанности:</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Проведение технического осмотра транспортных средств</li>
+                                <li>Оформление диагностических карт</li>
+                                <li>Работа с нормативной документацией</li>
+                                <li>Консультирование клиентов</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">Требования:</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Опыт работы от 1 года</li>
+                                <li>Знание нормативной документации по ТО</li>
+                                <li>Ответственность, внимательность</li>
+                                <li>Опыт работы с автомобильной техникой</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">Условия:</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Официальное трудоустройство</li>
+                                <li>Стабильная заработная плата</li>
+                                <li>График работы 5/2</li>
+                                <li>Обучение и развитие</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            'driver': {
+                title: 'Водитель автобуса',
+                content: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">Обязанности:</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Перевозка пассажиров по установленным маршрутам</li>
+                                <li>Соблюдение графика движения</li>
+                                <li>Контроль за техническим состоянием автобуса</li>
+                                <li>Ведение путевой документации</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">Требования:</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Категория D</li>
+                                <li>Стаж вождения от 3 лет</li>
+                                <li>Отсутствие нарушений ПДД</li>
+                                <li>Ответственность, вежливость</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">Условия:</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Официальное трудоустройство</li>
+                                <li>Социальный пакет</li>
+                                <li>Сменный график работы</li>
+                                <li>Стабильный доход</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            'dispatcher': {
+                title: 'Диспетчер',
+                content: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">Обязанности:</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Координация работы транспорта</li>
+                                <li>Составление графиков движения</li>
+                                <li>Ведение диспетчерской документации</li>
+                                <li>Взаимодействие с водителями и клиентами</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">Требования:</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Опыт работы в логистике</li>
+                                <li>Грамотная речь</li>
+                                <li>Умение работать в команде</li>
+                                <li>Внимательность, стрессоустойчивость</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">Условия:</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Официальное трудоустройство</li>
+                                <li>Работа в современном офисе</li>
+                                <li>График 5/2</li>
+                                <li>Карьерный рост</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // Функция открытия модального окна вакансии
+        function openJobModal(jobId) {
+            const job = jobsData[jobId];
+            if (job) {
+                document.getElementById('job-title').textContent = job.title;
+                document.getElementById('job-content').innerHTML = job.content;
+                openModal('jobs-modal');
+            }
+        }
+
+        // Назначение обработчиков для кнопок "Подробнее" в вакансиях
+        document.addEventListener('DOMContentLoaded', function() {
+            // Добавляем обработчики для кнопок вакансий
+            const jobButtons = document.querySelectorAll('[onclick*="openJobModal"]');
+            jobButtons.forEach(button => {
+                // Обработчики уже назначены через onclick
+            });
+        });
+    </script>
+
+    <script src="../js/validator.js"></script>
+</body>
+</html>

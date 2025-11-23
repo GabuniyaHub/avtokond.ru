@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация для клиентов - ООО «Автоконд»</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Красивые шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Melbourne_skybus_logo.svg/1024px-Melbourne_skybus_logo.svg.png?20230301150958" type="image/x-icon">
+
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/inforamtionsForClientsBanner.webp');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .legal-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .legal-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .accordion-content.open {
+            max-height: 1000px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Шапка -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-2xl font-bold text-gray-800">Автоконд</a>
+                
+                <!-- Навигация для десктопа -->
+                <nav class="desktop-nav hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-gray-800 font-medium">
+                        <i class="fas fa-home mr-1"></i> Главная
+                    </a>
+                </nav>
+                
+                <!-- Бургер-меню для мобильных и планшетов -->
+                <button class="mobile-menu-btn md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Мобильное меню -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-4 shadow-lg mt-4">
+                <nav class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-gray-700 hover:text-gray-900 transition py-2 flex items-center">
+                        <i class="fas fa-home mr-3"></i> На главную
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="hero-bg text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Информация для клиентов</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Правовые основы и нормативная база технического осмотра</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <div class="bg-gray-600 bg-opacity-50 px-4 py-2 rounded-lg">
+                    <div class="text-2xl font-bold">100%</div>
+                    <div class="text-sm">соответствие законам</div>
+                </div>
+                <div class="bg-gray-600 bg-opacity-50 px-4 py-2 rounded-lg">
+                    <div class="text-2xl font-bold">12490</div>
+                    <div class="text-sm">в реестре операторов ТО</div>
+                </div>
+                <div class="bg-gray-600 bg-opacity-50 px-4 py-2 rounded-lg">
+                    <div class="text-2xl font-bold">2011</div>
+                    <div class="text-sm">год основания системы ТО</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Основная информация -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Правовые основы технического осмотра</h2>
+                
+                <!-- Для чего нужен техосмотр -->
+                <div class="legal-card bg-gray-50 p-8 rounded-lg shadow-md border border-gray-200 mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800">Для чего нужен техосмотр</h3>
+                    <p class="text-lg text-gray-700 mb-6">При государственном техническом осмотре решаются следующие основные задачи (п.2 Положения о проведении техосмотра):
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-check text-gray-600 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Проверка соответствия</h4>
+                                    <p class="text-gray-600 text-sm">Технического состояния и оборудования ТС требованиям нормативных актов</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check text-gray-600 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Контроль допуска водителей</h4>
+                                    <p class="text-gray-600 text-sm">К участию в дорожном движении</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check text-gray-600 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Предупреждение нарушений</h4>
+                                    <p class="text-gray-600 text-sm">Связанных с эксплуатацией транспортных средств</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-check text-gray-600 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Выявление похищенных ТС</h4>
+                                    <p class="text-gray-600 text-sm">А также ТС участников ДТП, скрывшихся с мест происшествий</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check text-gray-600 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Государственный учет</h4>
+                                    <p class="text-gray-600 text-sm">Показателей состояния безопасности дорожного движения</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check text-gray-600 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Контроль страхования</h4>
+                                    <p class="text-gray-600 text-sm">За выполнением требования об обязательном страховании гражданской ответственности</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Аккордеон с законодательством -->
+                <div class="space-y-6">
+                    <!-- Основные законы -->
+                    <div class="legal-card bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <button class="accordion-btn w-full text-left flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-gray-800">Основные законодательные акты</h3>
+                            <i class="fas fa-chevron-down text-gray-600 transition-transform"></i>
+                        </button>
+                        <div class="accordion-content mt-4">
+                            <div class="space-y-3 text-sm"><div class="flex items-start">
+                                    <i class="fas fa-file-contract text-gray-500 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Федеральный закон № 170-ФЗ</h4>
+                                        <p class="text-gray-600">"О техническом осмотре транспортных средств" от 01.07.2011</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-file-contract text-gray-500 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Федеральный закон № 122-ФЗ</h4>
+                                        <p class="text-gray-600">"О внесении изменений в Федеральный закон о техническом осмотре" от 06.06.2019</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-file-contract text-gray-500 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Постановление Правительства № 1434</h4>
+                                        <p class="text-gray-600">"Об утверждении Правил проведения технического осмотра" от 15.09.2020</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Нормативные акты с 2021 года -->
+                    <div class="legal-card bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <button class="accordion-btn w-full text-left flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-gray-800">Нормативные акты с 1 марта 2021 года</h3>
+                            <i class="fas fa-chevron-down text-gray-600 transition-transform"></i>
+                        </button>
+                        <div class="accordion-content mt-4">
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-2">Постановления Правительства РФ:</h4>
+                                    <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+                                        <li>№ 1434 от 15.09.2020 "Об утверждении Правил проведения технического осмотра"</li>
+                                        <li>№ 1433 от 15.09.2020 "О проведении ТО городского наземного электрического транспорта"</li>
+                                        <li>№ 1054 от 16.07.2020 "О внесении изменений в Правила проведения ТО"</li>
+                                        <li>№ 1134 от 29.07.2020 "О единой автоматизированной информационной системе ТО"</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-2">Приказы Минтранса России:</h4>
+                                    <ul class="list-disc pl-5 space-y-1 text-sm text-gray-600">
+                                        <li>№ 232 от 09.07.2020 "О требованиях к производственно-технической базе оператора ТО"</li>
+                                        <li>№ 151 от 30.04.2020 "О методике расчета пропускной способности пункта ТО"</li>
+                                        <li>№ 97 от 31.03.2020 "О требованиях к фотографическому изображению ТС"</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Порядок проведения ТО -->
+                    <div class="legal-card bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <button class="accordion-btn w-full text-left flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-gray-800">Порядок проведения технического осмотра</h3>
+                            <i class="fas fa-chevron-down text-gray-600 transition-transform"></i>
+                        </button>
+                        <div class="accordion-content mt-4">
+                            <div class="space-y-4 text-sm text-gray-600">
+                                <p>Технический осмотр проводится в соответствии с установленными правилами и включает:</p>
+                                <ul class="list-disc pl-5 space-y-2">
+                                    <li>Визуальный осмотр транспортного средства</li>
+                                    <li>Проверку технических систем и оборудования</li>
+                                    <li>Контроль соответствия экологическим нормам</li>
+                                    <li>Оформление диагностической карты</li>
+                                    <li>Внесение сведений в единую автоматизированную систему</li>
+                                </ul>
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <h4 class="font-bold text-gray-800 mb-2">Основные документы:</h4>
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>Постановление Правительства РФ № 1008 от 05.12.2011</li>
+                                        <li>Приказ Минтранса России № 274 от 21.08.2013 "О правилах заполнения диагностической карты"</li>
+                                        <li>ГОСТ 33997-2016 "Требования к безопасности в эксплуатации"</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Контроль за операторами -->
+                    <div class="legal-card bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <button class="accordion-btn w-full text-left flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-gray-800">Контроль за деятельностью операторов ТО</h3>
+                            <i class="fas fa-chevron-down text-gray-600 transition-transform"></i>
+                        </button>
+                        <div class="accordion-content mt-4">
+                            <div class="space-y-4 text-sm text-gray-600">
+                                <p>Деятельность операторов технического осмотра находится под строгим контролем государственных органов:</p>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-2">Контролирующие органы:</h4>
+                                        <ul class="list-disc pl-5 space-y-1">
+                                            <li>Российский союз автостраховщиков (РСА)</li>
+                                            <li>Министерство транспорта РФ</li>
+                                            <li>Федеральная служба по надзору в сфере транспорта</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-2">Основные документы контроля:</h4>
+                                        <ul class="list-disc pl-5 space-y-1">
+                                            <li>Приказ ФСФР России № 13-32/пз-н от 06.05.2013</li>
+                                            <li>Постановление Правительства РФ № 534 от 17.04.2020</li>
+                                            <li>Статья 14.4.1 КоАП РФ</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                </div>
+
+                <!-- Важная информация -->
+                <div class="mt-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800 flex items-center">
+                        <i class="fas fa-info-circle text-blue-600 mr-3"></i>
+                        Важная информация
+                    </h3>
+                    <div class="space-y-3 text-sm text-gray-700">
+                        <p>• Все диагностические карты, выданные нашим пунктом технического осмотра, вносятся в единую автоматизированную информационную систему (ЕАИСТО)</p>
+                        <p>• Подлинность диагностических карт можно проверить на официальном сайте РСА</p>
+                        <p>• Мы работаем в строгом соответствии с действующим законодательством РФ</p>
+                        <p>• Наш оператор технического осмотра внесен в реестр под номером 12490</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты для справок -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-8 text-gray-800">Остались вопросы?</h2>
+                <p class="text-lg text-gray-600 mb-8">Наши специалисты готовы предоставить дополнительную информацию по юридическим аспектам технического осмотра</p>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-gray-700 text-3xl mb-4">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Телефоны</h3>
+                        <p class="text-gray-600 text-sm">8 (34677) 33463</p>
+                        <p class="text-gray-600 text-sm">8 (34677) 41409</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-gray-700 text-3xl mb-4">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Email</h3>
+                        <p class="text-gray-600 text-sm">avtokond2000@yandex.ru</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="text-gray-700 text-3xl mb-4">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Адрес</h3>
+                        <p class="text-gray-600 text-sm">ул. Сибирская, 121</p>
+                        <p class="text-gray-500 text-xs">пгт. Междуреченский</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold">ООО «Автоконд»</h3>
+                    <p class="text-gray-300">Техосмотр и транспортное обслуживание</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://vk.com/avtokond86" class="text-gray-300 hover:text-white transition">
+                        <i class="fab fa-vk text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+                <p>© 2026 ООО «Автоконд». Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Аккордеон для юридической информации
+        document.querySelectorAll('.accordion-btn').forEach(button => {
+            button.
+            addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('open');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Анимация появления карточек
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.legal-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+    <script>
+        // Мобильное меню для всех страниц
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Закрытие меню при клике на ссылку
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+            
+            // Закрытие меню при клике вне его
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.mobile-menu-btn') && 
+                    !event.target.closest('#mobile-menu') &&
+                    !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
