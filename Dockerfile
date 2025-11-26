@@ -16,6 +16,9 @@ RUN npx prisma generate
 # Копируем исходный код
 COPY . .
 
+# Make wait-for-db script executable in the builder stage
+RUN chmod +x /app/scripts/wait-for-db.sh
+
 # Собираем TypeScript в JavaScript (папка dist)
 RUN npm run build
 
@@ -40,9 +43,6 @@ COPY .env ./.env
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates openssl netcat-openbsd curl \
     && rm -rf /var/lib/apt/lists/*
-
-# Make wait-for-db script executable
-RUN chmod +x /app/scripts/wait-for-db.sh
 
 EXPOSE 3000
 
