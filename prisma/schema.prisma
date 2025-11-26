@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Модель для записей на техосмотр
+model Appointment {
+  id            String    @id @default(cuid())
+  
+  // Персональные данные
+  fullName      String
+  phone         String
+  email         String
+  
+  // Информация о ТС
+  vehicleType   String    // "car", "bus", "truck"
+  vehicleModel  String
+  vin           String?
+  licensePlate  String?
+  
+  // Информация о записи
+  appointmentDate DateTime
+  appointmentTime String
+  additionalInfo String?
+  
+  // Статус записи
+  status        String    @default("pending") // pending, confirmed, cancelled, completed
+  
+  // Коды подтверждения (для двухфакторной верификации)
+  verificationCode String?
+  verificationCodeExpiresAt DateTime?
+  isVerified    Boolean   @default(false)
+  
+  // Для автобусов М2 и М3
+  busCategory   String?   // "M2", "M3"
+  
+  // Метаданные
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  completedAt   DateTime?
+}
+
+// Модель для контактных сообщений
+model ContactMessage {
+  id            String    @id @default(cuid())
+  
+  fullName      String
+  email         String
+  phone         String?
+  subject       String
+  message       String
+  
+  status        String    @default("unread") // unread, read, replied
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// Модель для администраторов
+model Admin {
+  id            String    @id @default(cuid())
+  
+  username      String    @unique
+  email         String    @unique
+  passwordHash  String
+  
+  role          String    @default("admin") // admin, moderator
+  isActive      Boolean   @default(true)
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// Модель для логирования действий
+model AuditLog {
+  id            String    @id @default(cuid())
+  
+  adminId       String
+  action        String
+  entityType    String    // "appointment", "message", "admin"
+  entityId      String
+  changes       String?   // JSON string
+  
+  createdAt     DateTime  @default(now())
+}

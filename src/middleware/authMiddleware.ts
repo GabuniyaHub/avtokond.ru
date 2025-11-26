@@ -1,33 +1,104 @@
-// src/middleware/authMiddleware.ts
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_must_be_changed';
-
-// Определяем, что у запроса может быть поле user после проверки
-interface AuthRequest extends Request {
-    user?: { id: number; login: string };
+// Расширяем тип Request для добавления информации об администраторе
+declare global {
+    namespace Express {
+        interface Request {
+            admin?: {
+                id: string;
+                username: string;
+                email: string;
+                role: string;
+            };
+        }
+    }
 }
 
-export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
-    // 1. Получаем токен из заголовка Authorization
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res.status(401).json({ error: 'Доступ запрещен. Требуется токен.' });
-    }
-
-    const token = authHeader.split(' ')[1];
-
+/**
+ * Middleware для проверки JWT токена администратора
+ */
+export function authMiddleware(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
     try {
-        // 2. Верифицируем токен
-        const decoded = jwt.verify(token, JWT_SECRET) as { id: number; login: string };
-        
-        // 3. Сохраняем данные пользователя в запросе
-        req.user = decoded;
-        
-        next(); // Продолжаем выполнение маршрута
-    } catch (err) {
-        // Ошибка: токен невалиден или истек
-        return res.status(401).json({ error: 'Токен недействителен или истек.' });
+        const token = req.headers.authorization?.split(' ')[1];
+
+        if (!token) {
+            return res.status(401).json({
+                error: 'Требуется аутентификация. Пожалуйста, передайте JWT токен в заголовке Authorization',
+            });
+        }
+
+        const decoded = jwt.verify(
+            token,
+            process.env.JWT_SECRET || 'default-secret'
+        ) as any;
+
+        // Сохраняем информацию об администраторе в request
+        req.admin = {
+            id: decoded.id,
+            username: decoded.username,
+            email: decoded.email,
+            role: decoded.role,
+        };
+
+        next();
+    } catch (error: any) {
+        if (error.name === 'TokenExpiredError') {
+            return res.status(401).json({
+                error: 'Токен истек. Пожалуйста, войдите снова',
+            });
+        }
+
+        if (error.name === 'JsonWebTokenError') {
+            return res.status(401).json({
+                error: 'Некорректный токен',
+            });
+        }
+
+        res.status(500).json({
+            error: 'Ошибка при проверке аутентификации',
+        });
     }
-};
+}
+
+/**
+ * Middleware для проверки роли администратора
+ */
+export function adminRoleMiddleware(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    if (!req.admin || req.admin.role !== 'admin') {
+        return res.status(403).json({
+            error: 'Доступ запрещен. Требуются права администратора',
+        });
+    }
+
+    next();
+}
+
+/**
+ * Middleware для обработки ошибок
+ */
+export function errorHandler(
+    error: any,
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    console.error('Error:', error);
+
+    const statusCode = error.statusCode || 500;
+    const message = error.message || 'Внутренняя ошибка сервера';
+
+    res.status(statusCode).json({
+        error: message,
+        timestamp: new Date().toISOString(),
+        path: req.path,
+    });
+}

@@ -7,8 +7,10 @@
     "build": "tsc",
     "start": "node dist/src/index.js",
     "dev": "nodemon --watch src --exec ts-node src/index.ts",
-    "prisma:migrate": "npx prisma migrate dev --name init",
-    "prisma:seed": "ts-node prisma/seed.ts"
+    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:studio": "prisma studio",
+    "prisma:reset": "prisma migrate reset"
   },
   "keywords": [
     "express",
