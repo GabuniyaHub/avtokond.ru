@@ -21,7 +21,7 @@ export class ContactService {
                 phone: data.phone,
                 subject: data.subject,
                 message: data.message,
-                status: 'unread',
+                status: 'new',
             },
         });
 

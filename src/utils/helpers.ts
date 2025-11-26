@@ -63,3 +63,56 @@ export function validateVIN(vin: string): boolean {
 export function validateLicensePlate(plate: string): boolean {
     return plate.length >= 8;
 }
+
+/**
+ * Валидировать дату (не в прошлом)
+ */
+export function validateAppointmentDate(dateStr: string): boolean {
+    const appointmentDate = new Date(dateStr);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return appointmentDate >= today;
+}
+
+/**
+ * Валидировать время (формат HH:MM)
+ */
+export function validateAppointmentTime(timeStr: string): boolean {
+    const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    return timeRegex.test(timeStr);
+}
+
+/**
+ * Валидировать имя (минимум 3 символа, без спецсимволов)
+ */
+export function validateFullName(name: string): boolean {
+    return name.trim().length >= 3 && /^[a-яA-Яа-яёЁ\s\-']+$/i.test(name);
+}
+
+/**
+ * Валидировать сообщение (минимум 10 символов)
+ */
+export function validateMessage(message: string): boolean {
+    return message.trim().length >= 10;
+}
+
+/**
+ * Форматировать телефон для отправки (оставляем только цифры)
+ */
+export function normalizePhone(phone: string): string {
+    return phone.replace(/\D/g, '');
+}
+
+/**
+ * Форматировать VIN в верхний регистр
+ */
+export function normalizeVIN(vin: string): string {
+    return vin.toUpperCase().trim();
+}
+
+/**
+ * Форматировать гос. номер в верхний регистр
+ */
+export function normalizeLicensePlate(plate: string): string {
+    return plate.toUpperCase().trim();
+}

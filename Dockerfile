@@ -26,14 +26,16 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Копируем только то, что нужно для запуска:
-# node_modules, папку dist, папку prisma, .env
+# node_modules, папку dist, папку prisma, scripts, public, .env
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/scripts ./scripts
+COPY --from=builder /app/public ./public
 COPY .env ./.env
 
 EXPOSE 3000
 
-# Запускаем скомпилированный файл
-CMD ["node", "dist/src/index.js"]
+# Запускаем скрипт миграций и затем сервер
+CMD sh -c "npm run prisma:deploy && npm run seed && node dist/src/index.js"

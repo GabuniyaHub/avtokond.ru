@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import appointmentController from '../controllers/AppointmentController';
+import { authMiddleware } from '../middleware/authMiddleware';
 
 const router = Router();
 
@@ -24,21 +25,20 @@ router.post('/resend-code', (req, res) =>
 
 /**
  * Административные маршруты (требуют авторизации)
- * TODO: Добавить middleware для проверки JWT токена
  */
 
 // Получить все записи
-router.get('/admin/appointments', (req, res) =>
+router.get('/admin/appointments', authMiddleware, (req, res) =>
     appointmentController.getAllAppointments(req, res)
 );
 
 // Получить запись по ID
-router.get('/admin/appointments/:id', (req, res) =>
+router.get('/admin/appointments/:id', authMiddleware, (req, res) =>
     appointmentController.getAppointmentById(req, res)
 );
 
-// Отменить запись
-router.put('/admin/appointments/:id/cancel', (req, res) =>
+// Обновить статус записи
+router.put('/admin/appointments/:id/cancel', authMiddleware, (req, res) =>
     appointmentController.cancelAppointment(req, res)
 );
 

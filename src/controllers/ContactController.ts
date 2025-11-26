@@ -114,6 +114,31 @@ export class ContactController {
             });
         }
     }
+
+    /**
+     * PUT /api/admin/messages/:id
+     * Обновить статус сообщения
+     */
+    async updateMessage(req: Request, res: Response) {
+        try {
+            const { id } = req.params;
+            const { status } = req.body;
+
+            if (!status || !['new', 'read', 'answered'].includes(status)) {
+                return res.status(400).json({
+                    error: 'Некорректный статус. Допустимые значения: new, read, answered',
+                });
+            }
+
+            const updated = await contactService.updateMessageStatus(id, status);
+            res.status(200).json(updated);
+        } catch (error: any) {
+            console.error('Error in updateMessage:', error);
+            res.status(500).json({
+                error: 'Ошибка при обновлении сообщения',
+            });
+        }
+    }
 }
 
 export default new ContactController();

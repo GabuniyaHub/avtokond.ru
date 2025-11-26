@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import contactController from '../controllers/ContactController';
+import { authMiddleware } from '../middleware/authMiddleware';
 
 const router = Router();
 
@@ -12,21 +13,25 @@ router.post('/', (req, res) => contactController.createMessage(req, res));
 
 /**
  * Административные маршруты (требуют авторизации)
- * TODO: Добавить middleware для проверки JWT токена
  */
 
 // Получить все сообщения
-router.get('/admin/messages', (req, res) =>
+router.get('/admin/messages', authMiddleware, (req, res) =>
     contactController.getAllMessages(req, res)
 );
 
 // Получить сообщение по ID
-router.get('/admin/messages/:id', (req, res) =>
+router.get('/admin/messages/:id', authMiddleware, (req, res) =>
     contactController.getMessageById(req, res)
 );
 
+// Обновить статус сообщения
+router.put('/admin/messages/:id', authMiddleware, (req, res) =>
+    contactController.updateMessage(req, res)
+);
+
 // Удалить сообщение
-router.delete('/admin/messages/:id', (req, res) =>
+router.delete('/admin/messages/:id', authMiddleware, (req, res) =>
     contactController.deleteMessage(req, res)
 );
 

@@ -1,8 +1,11 @@
 import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 import appointmentRoutes from './routes/appointmentRoutes';
 import contactRoutes from './routes/contactRoutes';
+import authRoutes from './routes/authRoutes';
+import { errorHandler, loggingMiddleware } from './middleware/authMiddleware';
 
 // Загруженисловия переменных окружения
 dotenv.config();
@@ -14,6 +17,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Служба статических файлов (для админ-панели и других)
+app.use(express.static(path.join(__dirname, '../public')));
+
 // CORS - разрешить запросы с фронтенда
 app.use(
     cors({
@@ -23,11 +29,8 @@ app.use(
     })
 );
 
-// Логирование запросов (для развития)
-app.use((req: Request, res: Response, next) => {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
-    next();
-});
+// Логирование запросов
+app.use(loggingMiddleware);
 
 // Главный маршрут
 app.get('/', (req: Request, res: Response) => {
@@ -55,6 +58,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 // Маршруты
+app.use('/api/auth', authRoutes);
 app.use('/api/appointment', appointmentRoutes);
 app.use('/api/contact', contactRoutes);
 
@@ -66,6 +70,9 @@ app.use((req: Request, res: Response) => {
         method: req.method,
     });
 });
+
+// Глобальная обработка ошибок
+app.use(errorHandler);
 
 // Запуск сервера
 app.listen(PORT, () => {

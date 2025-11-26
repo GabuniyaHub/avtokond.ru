@@ -2,7 +2,10 @@
  * Формы и API для взаимодействия с бэкендом Avtokond
  */
 
-const API_BASE_URL = 'http://localhost:3000/api';
+// Определяем базовый URL API в зависимости от окружения
+const API_BASE_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000/api'
+    : `${window.location.protocol}//${window.location.hostname}:4080/api`;
 
 // ============================================
 // ФОРМА ЗАПИСИ НА ТЕХОСМОТР

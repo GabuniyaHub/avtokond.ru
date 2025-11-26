@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель - Avtokond</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Логин страница -->
+    <div id="loginPage" class="fade-in">
+        <div class="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center p-4">
+            <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+                <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Avtokond Admin</h1>
+
+                <form id="loginForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Имя пользователя</label>
+                        <input type="text" id="username" name="username" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Введите имя пользователя">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Пароль</label>
+                        <input type="password" id="password" name="password" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Введите пароль">
+                    </div>
+
+                    <div id="loginError" class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                        Войти
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Страница админ-панели -->
+    <div id="dashboardPage" class="hidden">
+        <!-- Навигация -->
+        <nav class="bg-blue-600 text-white shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <h2 class="text-2xl font-bold">Avtokond Admin Panel</h2>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span id="adminUsername" class="text-sm"></span>
+                        <button id="logoutBtn"
+                            class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded text-sm font-semibold transition">
+                            Выход
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Главная секция -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Статистика -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-gray-500 text-sm font-semibold mb-2">ВСЕГО ЗАПИСЕЙ</h3>
+                    <p class="text-3xl font-bold text-blue-600" id="totalAppointments">0</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-gray-500 text-sm font-semibold mb-2">НОВЫХ СООБЩЕНИЙ</h3>
+                    <p class="text-3xl font-bold text-green-600" id="totalMessages">0</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-gray-500 text-sm font-semibold mb-2">ОЖИДАЮЩИХ</h3>
+                    <p class="text-3xl font-bold text-orange-600" id="pendingAppointments">0</p>
+                </div>
+            </div>
+
+            <!-- Вкладки -->
+            <div class="flex space-x-4 mb-6 border-b border-gray-200">
+                <button data-tab="appointments"
+                    class="tab-button active px-4 py-2 border-b-2 border-blue-600 text-blue-600 font-semibold">
+                    Записи на обслуживание
+                </button>
+                <button data-tab="messages" class="tab-button px-4 py-2 text-gray-600 hover:text-gray-800">
+                    Контактные сообщения
+                </button>
+            </div>
+
+            <!-- Содержимое вкладок -->
+            <div id="appointmentsTab" class="tab-content">
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <!-- Фильтры -->
+                    <div class="p-6 border-b border-gray-200">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Статус</label>
+                                <select id="appointmentStatusFilter"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Все статусы</option>
+                                    <option value="pending">Ожидает подтверждения</option>
+                                    <option value="confirmed">Подтверждена</option>
+                                    <option value="completed">Выполнена</option>
+                                    <option value="cancelled">Отменена</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Поиск</label>
+                                <input type="text" id="appointmentSearch" placeholder="Имя, телефон, email"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div class="flex items-end">
+                                <button id="refreshAppointments"
+                                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                                    Обновить
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Таблица записей -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-100 border-b border-gray-200">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">ФИО</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Контакты</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Автомобиль</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Дата/Время</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Статус</th>
+                                    <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900">Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="appointmentsTableBody">
+                                <tr>
+                                    <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                                        Загрузка данных...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="messagesTab" class="tab-content hidden">
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <!-- Фильтры -->
+                    <div class="p-6 border-b border-gray-200">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Статус</label>
+                                <select id="messageStatusFilter"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Все статусы</option>
+                                    <option value="new">Новое</option>
+                                    <option value="read">Прочитано</option>
+                                    <option value="answered">Ответил</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Поиск</label>
+                                <input type="text" id="messageSearch" placeholder="Имя, email, тема"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div class="flex items-end">
+                                <button id="refreshMessages"
+                                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                                    Обновить
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Таблица сообщений -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-100 border-b border-gray-200">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">ФИО</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Email</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Тема</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Дата</th>
+                                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900">Статус</th>
+                                    <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900">Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody id="messagesTableBody">
+                                <tr>
+                                    <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                                        Загрузка данных...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно детальной информации о записи -->
+    <div id="appointmentModal" class="modal">
+        <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Детали записи</h3>
+                <button id="closeAppointmentModal" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+
+            <div id="appointmentDetails" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-sm font-semibold text-gray-600">ФИО:</label>
+                        <p id="detailName" class="text-gray-900"></p>
+                    </div>
+                    <div>
+                        <label class="text-sm font-semibold text-gray-600">Телефон:</label>
+                        <p id="detailPhone" class="text-gray-900"></p>
+                    </div>
+                    <div>
+                        <label class="text-sm font-semibold text-gray-600">Email:</label>
+                        <p id="detailEmail" class="text-gray-900"></p>
+                    </div>
+                    <div>
+                        <label class="text-sm font-semibold text-gray-600">Дата/Время:</label>
+                        <p id="detailDateTime" class="text-gray-900"></p>
+                    </div>
+                    <div>
+                        <label class="text-sm font-semibold text-gray-600">Тип автомобиля:</label>
+                        <p id="detailVehicleType" class="text-gray-900"></p>
+                    </div>
+                    <div>
+                        <label class="text-sm font-semibold text-gray-600">Категория:</label>
+                        <p id="detailBusCategory" class="text-gray-900"></p>
+                    </div>
+                    <div class="col-span-2">
+                        <label class="text-sm font-semibold text-gray-600">Модель ТС:</label>
+                        <p id="detailVehicleModel" class="text-gray-900"></p>
+                    </div>
+                    <div class="col-span-2">
+                        <label class="text-sm font-semibold text-gray-600">VIN:</label>
+                        <p id="detailVin" class="text-gray-900 font-mono"></p>
+                    </div>
+                    <div class="col-span-2">
+                        <label class="text-sm font-semibold text-gray-600">Госномер:</label>
+                        <p id="detailLicensePlate" class="text-gray-900 font-mono"></p>
+                    </div>
+                    <div class="col-span-2">
+                        <label class="text-sm font-semibold text-gray-600">Статус:</label>
+                        <select id="detailStatus" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                            <option value="pending">Ожидает подтверждения</option>
+                            <option value="confirmed">Подтверждена</option>
+                            <option value="completed">Выполнена</option>
+                            <option value="cancelled">Отменена</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end space-x-4 mt-8">
+                <button id="closeAppointmentModalBtn"
+                    class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-6 rounded-lg transition">
+                    Закрыть
+                </button>
+                <button id="saveAppointmentBtn"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition">
+                    Сохранить
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для просмотра сообщения -->
+    <div id="messageModal" class="modal">
+        <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Сообщение</h3>
+                <button id="closeMessageModal" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+
+            <div id="messageDetails" class="space-y-4">
+                <div>
+                    <label class="text-sm font-semibold text-gray-600">От:</label>
+                    <p id="msgName" class="text-gray-900"></p>
+                </div>
+                <div>
+                    <label class="text-sm font-semibold text-gray-600">Email:</label>
+                    <p id="msgEmail" class="text-gray-900"></p>
+                </div>
+                <div>
+                    <label class="text-sm font-semibold text-gray-600">Телефон:</label>
+                    <p id="msgPhone" class="text-gray-900"></p>
+                </div>
+                <div>
+                    <label class="text-sm font-semibold text-gray-600">Тема:</label>
+                    <p id="msgSubject" class="text-gray-900"></p>
+                </div>
+                <div>
+                    <label class="text-sm font-semibold text-gray-600">Сообщение:</label>
+                    <p id="msgText" class="text-gray-900 bg-gray-50 p-4 rounded"></p>
+                </div>
+                <div>
+                    <label class="text-sm font-semibold text-gray-600">Статус:</label>
+                    <select id="msgStatus" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                        <option value="new">Новое</option>
+                        <option value="read">Прочитано</option>
+                        <option value="answered">Ответил</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex justify-end space-x-4 mt-8">
+                <button id="deleteMessageBtn"
+                    class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-lg transition">
+                    Удалить
+                </button>
+                <button id="closeMessageModalBtn"
+                    class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-6 rounded-lg transition">
+                    Закрыть
+                </button>
+                <button id="saveMessageBtn"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition">
+                    Сохранить
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/admin/dashboard.js"></script>
+</body>
+
+</html>

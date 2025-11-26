@@ -8,7 +8,6 @@ declare global {
             admin?: {
                 id: string;
                 username: string;
-                email: string;
                 role: string;
             };
         }
@@ -28,7 +27,7 @@ export function authMiddleware(
 
         if (!token) {
             return res.status(401).json({
-                error: 'Требуется аутентификация. Пожалуйста, передайте JWT токен в заголовке Authorization',
+                error: 'Authentication required. Please provide JWT token in Authorization header',
             });
         }
 
@@ -41,7 +40,6 @@ export function authMiddleware(
         req.admin = {
             id: decoded.id,
             username: decoded.username,
-            email: decoded.email,
             role: decoded.role,
         };
 
@@ -49,18 +47,18 @@ export function authMiddleware(
     } catch (error: any) {
         if (error.name === 'TokenExpiredError') {
             return res.status(401).json({
-                error: 'Токен истек. Пожалуйста, войдите снова',
+                error: 'Token expired. Please login again',
             });
         }
 
         if (error.name === 'JsonWebTokenError') {
             return res.status(401).json({
-                error: 'Некорректный токен',
+                error: 'Invalid token',
             });
         }
 
         res.status(500).json({
-            error: 'Ошибка при проверке аутентификации',
+            error: 'Authentication error',
         });
     }
 }
@@ -75,9 +73,27 @@ export function adminRoleMiddleware(
 ) {
     if (!req.admin || req.admin.role !== 'admin') {
         return res.status(403).json({
-            error: 'Доступ запрещен. Требуются права администратора',
+            error: 'Access denied. Admin rights required',
         });
     }
+
+    next();
+}
+
+/**
+ * Middleware для логирования
+ */
+export function loggingMiddleware(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    const timestamp = new Date().toISOString();
+    const method = req.method;
+    const path = req.path;
+    const adminId = req.admin?.id || 'anonymous';
+
+    console.log(`[${timestamp}] ${method} ${path} (admin: ${adminId})`);
 
     next();
 }
@@ -94,7 +110,7 @@ export function errorHandler(
     console.error('Error:', error);
 
     const statusCode = error.statusCode || 500;
-    const message = error.message || 'Внутренняя ошибка сервера';
+    const message = error.message || 'Internal server error';
 
     res.status(statusCode).json({
         error: message,

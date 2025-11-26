@@ -7,23 +7,23 @@ import appointmentService from '../services/AppointmentService';
  * Получение всех записей (требует JWT)
  */
 export async function getAdminAppointments(req: Request, res: Response) {
-  try {
-    const { status, vehicleType, startDate, endDate } = req.query;
+    try {
+        const { status, vehicleType, startDate, endDate } = req.query;
 
-    const appointments = await appointmentService.getAllAppointments({
-      status: status as string,
-      vehicleType: vehicleType as string,
-      startDate: startDate ? new Date(startDate as string) : undefined,
-      endDate: endDate ? new Date(endDate as string) : undefined,
-    });
+        const appointments = await appointmentService.getAllAppointments({
+            status: status as string,
+            vehicleType: vehicleType as string,
+            startDate: startDate ? new Date(startDate as string) : undefined,
+            endDate: endDate ? new Date(endDate as string) : undefined,
+        });
 
-    res.status(200).json(appointments);
-  } catch (error: any) {
-    console.error('Error in getAdminAppointments:', error);
-    res.status(500).json({
-      error: 'Ошибка при получении записей',
-    });
-  }
+        res.status(200).json(appointments);
+    } catch (error: any) {
+        console.error('Error in getAdminAppointments:', error);
+        res.status(500).json({
+            error: 'Ошибка при получении записей',
+        });
+    }
 }
 
 /**
@@ -31,20 +31,20 @@ export async function getAdminAppointments(req: Request, res: Response) {
  * Получить запись по ID
  */
 export async function getAdminAppointmentById(req: Request, res: Response) {
-  try {
-    const { id } = req.params;
+    try {
+        const { id } = req.params;
 
-    const appointment = await appointmentService.getAppointmentById(id);
-    res.status(200).json(appointment);
-  } catch (error: any) {
-    console.error('Error in getAdminAppointmentById:', error);
-    res.status(404).json({
-      error: error.message || 'Запись не найдена',
-    });
-  }
+        const appointment = await appointmentService.getAppointmentById(id);
+        res.status(200).json(appointment);
+    } catch (error: any) {
+        console.error('Error in getAdminAppointmentById:', error);
+        res.status(404).json({
+            error: error.message || 'Запись не найдена',
+        });
+    }
 }
 
 export default {
-  getAdminAppointments,
-  getAdminAppointmentById,
+    getAdminAppointments,
+    getAdminAppointmentById,
 };
